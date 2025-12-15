@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  
+  <!-- Root element -->
+  <xs:element name="eExact">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GLAccounts" type="GLAccountsType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- GLAccounts container -->
+  <xs:complexType name="GLAccountsType">
+    <xs:sequence>
+      <xs:element name="GLAccount" type="GLAccountType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!-- Individual GLAccount -->
+  <xs:complexType name="GLAccountType">
+    <xs:sequence>
+      <xs:element name="Code" type="xs:string"/>
+      <xs:element name="Description" type="xs:string"/>
+      <xs:element name="Type" type="AccountTypeCode"/>
+      <xs:element name="TypeDescription" type="xs:string" minOccurs="0"/>
+      <xs:element name="BalanceSide" type="BalanceSideType" minOccurs="0"/>
+      <xs:element name="BalanceType" type="BalanceTypeCode" minOccurs="0"/>
+      <xs:element name="IsBlocked" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="Compress" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="SearchCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="VATCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="CostCenter" type="xs:string" minOccurs="0"/>
+      <xs:element name="CostUnit" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!-- Account Type restriction -->
+  <xs:simpleType name="AccountTypeCode">
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="12"/>
+      <xs:enumeration value="13"/>
+      <xs:enumeration value="20"/>
+      <xs:enumeration value="30"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <!-- Balance Side restriction -->
+  <xs:simpleType name="BalanceSideType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="D"/>
+      <xs:enumeration value="C"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <!-- Balance Type restriction -->
+  <xs:simpleType name="BalanceTypeCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="B"/>
+      <xs:enumeration value="W"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>
